@@ -5,7 +5,7 @@ import android.content.Intent;
 import android.media.MediaPlayer;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.view.View;
+import android.view.*;
 import android.widget.*;
 
 public class SoundActivity extends Activity implements Runnable
@@ -48,15 +48,81 @@ public class SoundActivity extends Activity implements Runnable
             }
         });
 
-        pauseButton.setOnClickListener(new View.onClickListener()
+        pauseButton.setOnClickListener(new View.OnClickListener()
         {
             @Override
             public void onClick(View v)
             {
                 soundPlayer.pause();
             }
+        });
+
+
+        stopButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View currentView) {
+                soundPlayer.stop();
+                soundPlayer = MediaPlayer.create(getBaseContext(), R.raw.poker2);
+            }
+        });
+
+        videoButton.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View currentView)
+            {
+                Intent myIntent = new Intent(currentView.getContext(), videoActivity.class);
+                startActivityForResult(myIntent, 0);
+            }
+        });
+
+        soundSeekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+
+            @Override
+            public void onStopTrackingTouch(SeekBar seekBar) {
+            }
+
+            @Override
+            public void onStartTrackingTouch(SeekBar seekBar) {
+            }
+
+            @Override
+            public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
+                if (fromUser) {
+                    soundPlayer.seekTo(progress);
+                }
+            }
+
+
+        });
+    }
+
+    @Override
+    public void run()
+    {
+        int currentPosition = 0;
+        int soundTotal = soundPlayer.getDuration();
+         soundSeekBar.setMax(soundTotal);
+
+        while (soundPlayer != null && currentPosition < soundTotal)
+        {
+            try
+            {
+                Thread.sleep(300);
+                currentPosition = soundPlayer.getCurrentPosition();
+            }
+            catch(InterruptedException soundException)
+            {
+                return;
+            }
+            catch(Exception otherException)
+            {
+                return;
+            }
+            soundSeekBar.setProgress(currentPosition);
         }
     }
+
 
 
     @Override

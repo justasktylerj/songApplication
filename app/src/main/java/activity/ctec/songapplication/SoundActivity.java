@@ -58,9 +58,11 @@ public class SoundActivity extends Activity implements Runnable
         });
 
 
-        stopButton.setOnClickListener(new View.OnClickListener() {
+        stopButton.setOnClickListener(new View.OnClickListener()
+        {
             @Override
-            public void onClick(View currentView) {
+            public void onClick(View currentView)
+            {
                 soundPlayer.stop();
                 soundPlayer = MediaPlayer.create(getBaseContext(), R.raw.poker2);
             }
@@ -76,19 +78,24 @@ public class SoundActivity extends Activity implements Runnable
             }
         });
 
-        soundSeekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+        soundSeekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener()
+        {
 
             @Override
-            public void onStopTrackingTouch(SeekBar seekBar) {
+            public void onStopTrackingTouch(SeekBar seekBar)
+            {
             }
 
             @Override
-            public void onStartTrackingTouch(SeekBar seekBar) {
+            public void onStartTrackingTouch(SeekBar seekBar)
+            {
             }
 
             @Override
-            public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
-                if (fromUser) {
+            public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser)
+            {
+                if (fromUser)
+                {
                     soundPlayer.seekTo(progress);
                 }
             }

@@ -7,6 +7,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.*;
 import android.widget.*;
+import android.graphics.Color;
 
 public class SoundActivity extends Activity implements Runnable
 {
@@ -14,6 +15,7 @@ public class SoundActivity extends Activity implements Runnable
     private Button stopButton;
     private Button pauseButton;
     private Button videoButton;
+    private RelativeLayout backgroundLayout;
     private MediaPlayer soundPlayer;
     private SeekBar soundSeekBar;
     private Thread soundThread;
@@ -27,6 +29,7 @@ public class SoundActivity extends Activity implements Runnable
         startButton = (Button) findViewById(R.id.playButton);
         pauseButton = (Button) findViewById(R.id.pauseButton);
         stopButton = (Button) findViewById(R.id.stopButton);
+        backgroundLayout = (RelativeLayout) findViewById(R.id.backgroundLayout);
         videoButton = (Button) findViewById(R.id.videoButton);
         soundSeekBar = (SeekBar) findViewById(R.id.soundSeekBar);
         soundPlayer = MediaPlayer.create(this.getBaseContext(), R.raw.poker2);
@@ -37,8 +40,25 @@ public class SoundActivity extends Activity implements Runnable
         soundThread.start();
     }
 
+    private void changeBackgroundColor()
+    {
+        int redColor;
+        int greenColor;
+        int blueColor;
+
+        redColor = (int) (Math.random() * 256);
+        greenColor = (int) (Math.random() * 256);
+        blueColor = (int) (Math.random() * 256);
+
+        backgroundLayout.setBackgroundColor(Color.rgb(redColor, greenColor, blueColor));
+
+
+    }
+
+
     private void setUpListeners()
     {
+
         startButton.setOnClickListener(new View.OnClickListener()
         {
             @Override
@@ -54,6 +74,7 @@ public class SoundActivity extends Activity implements Runnable
             public void onClick(View v)
             {
                 soundPlayer.pause();
+                changeBackgroundColor();
             }
         });
 
@@ -76,6 +97,7 @@ public class SoundActivity extends Activity implements Runnable
                 Intent myIntent = new Intent(currentView.getContext(), videoActivity.class);
                 startActivityForResult(myIntent, 0);
             }
+
         });
 
         soundSeekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener()

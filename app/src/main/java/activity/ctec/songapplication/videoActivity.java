@@ -9,6 +9,7 @@ import android.view.MenuItem;
 import android.widget.*;
 import android.net.Uri;
 import android.content.Intent;
+import java.util.Random;
 
 public class videoActivity extends Activity
 {
@@ -16,6 +17,7 @@ public class videoActivity extends Activity
     private Button homeButton;
     private MediaController myVideoController;
     private Uri videoLocation;
+    private int winner;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -53,8 +55,19 @@ public class videoActivity extends Activity
         {
             public void onClick(View currentView)
             {
-                Intent myIntent = new Intent(currentView.getContext(), SoundActivity.class);
-                startActivityForResult(myIntent, 0);
+
+                winner = new Random().nextInt((25 - 1) +1);
+
+                if(winner == 25)
+                {
+                    
+                }
+                else
+                {
+                    Intent myIntent = new Intent(currentView.getContext(), SoundActivity.class);
+                    startActivityForResult(myIntent, 0);
+                }
+
             }
         });
     }

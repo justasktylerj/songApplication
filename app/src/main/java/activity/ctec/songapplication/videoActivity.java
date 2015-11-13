@@ -1,6 +1,7 @@
 package activity.ctec.songapplication;
 
 import android.app.Activity;
+import android.graphics.Color;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Menu;
@@ -9,19 +10,18 @@ import android.view.MenuItem;
 import android.widget.*;
 import android.net.Uri;
 import android.content.Intent;
-import java.util.Random;
 
-public class videoActivity extends Activity
-{
+
+public class videoActivity extends Activity {
     private VideoView videoView;
     private Button homeButton;
     private MediaController myVideoController;
     private Uri videoLocation;
-    private int winner;
+
+
 
     @Override
-    protected void onCreate(Bundle savedInstanceState)
-    {
+    protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_video);
 
@@ -55,19 +55,8 @@ public class videoActivity extends Activity
         {
             public void onClick(View currentView)
             {
-
-                winner = new Random().nextInt((25 - 1) +1);
-
-                if(winner == 25)
-                {
-                    
-                }
-                else
-                {
                     Intent myIntent = new Intent(currentView.getContext(), SoundActivity.class);
                     startActivityForResult(myIntent, 0);
-                }
-
             }
         });
     }
